@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: lab-nginx
+spec:
+  destination:
+    name: ''
+    namespace: lab-app
+    server: 'https://agdatadev01-dns-tb5lxtcy.hcp.eastus2.azmk8s.io:443'
+  source:
+    path: nginx/overlay/dev
+    repoURL: 'https://github.com/jeancarlor/k8s-deploy.git'
+    targetRevision: HEAD
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
